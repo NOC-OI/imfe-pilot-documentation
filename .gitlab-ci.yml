@@ -1,0 +1,36 @@
+build-job:
+  stage: build
+  tags: 
+    - shell
+  script:
+    - HYPERVISOR=`lscpu | grep "^Hypervisor" | awk '{print $3}'`
+    #hypervisor is VMWare on JASMIN and KVM for Oracle
+    - if [ "$HYPERVISOR" = "VMware" ] ; then
+    #note: we must have done a "docker login docker-repo.bodc.me" manually on the build and web VMs before this pipeline can run
+    - docker build -t docker-repo.bodc.me/oceaninfo/imfe-pilot/documentation:latest .
+    - else
+    #push to oracle container registry 
+    - docker build -t uk-london-1.ocir.io/lrl8vbuxj1ma/documentation:latest .
+    - fi
+
+
+deploy-job:
+  stage: deploy
+  tags:
+      - shell
+  rules: #only deploy on the master branch
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+     #note: we must have done a "docker login docker-repo.bodc.me" manually on the build and web VMs before this pipeline can run
+    - HYPERVISOR=`lscpu | grep "^Hypervisor" | awk '{print $3}'`
+    #hypervisor is VMWare on JASMIN and KVM for Oracle
+    - if [ "$HYPERVISOR" = "VMware" ] ; then
+    #note: we must have done a "docker login docker-repo.bodc.me" manually on the build and web VMs before this pipeline can run
+    - docker push docker-repo.bodc.me/oceaninfo/imfe-pilot/documentation:latest
+    - ssh web 'docker pull docker-repo.bodc.me/oceaninfo/imfe-pilot/documentation:latest'
+    - ssh web 'docker stop documentation || true && docker container rm documentation || true && docker run -d -p 8084:8000 --name documentation --rm docker-repo.bodc.me/oceaninfo/imfe-pilot/documentation:latest'
+    - else
+    - docker push uk-london-1.ocir.io/lrl8vbuxj1ma/documentation:latest
+    - ssh web 'docker pull uk-london-1.ocir.io/lrl8vbuxj1ma/documentation:latest'
+    - ssh web 'docker stop documentation || true && docker container rm documentation || true && docker run -d -p 8084:8000 --name documentation --rm uk-london-1.ocir.io/lrl8vbuxj1ma/documentation:latest'
+    - fi

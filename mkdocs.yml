@@ -1,0 +1,8 @@
+site_name: Haig Fras Digital Twin
+site_dir: public
+nav:
+  - 'index.md'
+  - 'about.md'
+plugins:
+  - search
+  - print-site

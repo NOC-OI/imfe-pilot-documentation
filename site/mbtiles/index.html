@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>MBTiles - Haig Fras Digital Twin</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Haig Fras Digital Twin</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#mbtiles" class="nav-link">MBTiles</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#introduction" class="nav-link">Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#mbtiles-file-format" class="nav-link">MBTiles File Format</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#server-for-handling-mbtiles" class="nav-link">Server for Handling MBTiles</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#project-repository" class="nav-link">Project Repository</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#generating-mbtiles-data" class="nav-link">Generating MBTiles Data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#map-visualization" class="nav-link">Map Visualization</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#limitations-in-3d-mapping" class="nav-link">Limitations in 3D Mapping</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="mbtiles">MBTiles</h1>
+<h2 id="introduction">Introduction</h2>
+<p>MBTiles are files used to store vector data in the form of an SQLite database. In our project, we utilize MBTiles as a critical component for efficiently managing and rendering vector data. This documentation explains how MBTiles are used in our system and provides insights into the processes and infrastructure that support them.</p>
+<h2 id="mbtiles-file-format">MBTiles File Format</h2>
+<p>MBTiles serve as the fundamental data format for storing vector information. They are employed to manage spatial data in a compact and organized manner. These files essentially consist of SQLite databases optimized for spatial queries.</p>
+<h2 id="server-for-handling-mbtiles">Server for Handling MBTiles</h2>
+<p>To access and process MBTiles files, we've developed a Python-based service. This service is responsible for executing queries on the database and returning the specific data required for rendering on the frontend. It plays a pivotal role in ensuring that only relevant map data is retrieved and displayed on the map, optimizing both performance and resource utilization.</p>
+<p>Our MBTiles server is based on the <a href="https://github.com/uktrade/mbtiles-s3-server">mbtiles-s3-server</a> library, which provides efficient and scalable methods for serving MBTiles data. This service is currently in production and can be accessed through the following links:</p>
+<ul>
+<li><a href="https://imfe-pilot-mbtiles.noc.ac.uk.net/">https://imfe-pilot-mbtiles.noc.ac.uk.net/</a></li>
+<li><a href="https://haigfras-salt-mbtiles.co.uk/">https://haigfras-salt-mbtiles.co.uk/</a></li>
+</ul>
+<h2 id="project-repository">Project Repository</h2>
+<p>The codebase for our MBTiles service is hosted on GitLab, and you can access the repository at <a href="https://github.com/NOC-OI/imfe-pilot-tileserver">https://github.com/NOC-OI/imfe-pilot-tileserver</a>. This repository contains the source code, documentation, and configurations related to our MBTiles server.</p>
+<h2 id="generating-mbtiles-data">Generating MBTiles Data</h2>
+<p>For this project, we are using the output of the EUSeaMap 2021 large-scale predictive model produced by EMODnet Seabed Habitats. The data was extracted from <a href="http://gis.ices.dk/geonetwork/srv/eng/catalog.search#/metadata/10d3d35c-8f8e-40ff-898f-32e0b037356c">here</a> in Geodatabase format. It was converted to GeoJSON format using the <a href="https://gdal.org/">GDAL library</a>. Finally, the GeoJSON file was converted to MBTiles format, representing an SQLite database, using the <a href="https://github.com/mapbox/tippecanoe">tippecanoe library</a>. The conversion utilized the "—drop-densest-as-needed" option.</p>
+<p>Detailed steps for file conversion are described in the <a href="https://github.com/NOC-OI/imfe-pilot-tileserver">repository</a>.</p>
+<h2 id="map-visualization">Map Visualization</h2>
+<p>To provide a visual overview, here's an example of a 2D map rendering using MBTiles data:</p>
+<p><img alt="2D Map Overview" src="public/readme/mbtiles.png" /></p>
+<p><em>The above image illustrates a 2D map visualization using MBTiles data.</em></p>
+<h2 id="limitations-in-3d-mapping">Limitations in 3D Mapping</h2>
+<p>It's important to note that due to certain limitations imposed by the Cesium library, opening MBTiles files in 3D maps is not currently supported. Our project primarily focuses on optimizing 2D map rendering, and we are actively exploring solutions to extend this functionality to 3D mapping in the future.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://imfe-pilot-docs.gitlab.io/home/photos/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>CSV - Organisms Annotations - Haig Fras Digital Twin</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="../css/print-site-enum-headings1.css" rel="stylesheet">
+        <link href="../css/print-site-enum-headings2.css" rel="stylesheet">
+        <link href="../css/print-site-enum-headings3.css" rel="stylesheet">
+        <link href="../css/print-site-enum-headings4.css" rel="stylesheet">
+        <link href="../css/print-site-enum-headings5.css" rel="stylesheet">
+        <link href="../css/print-site-enum-headings6.css" rel="stylesheet">
+        <link href="../css/print-site.css" rel="stylesheet">
+        <link href="../css/print-site-mkdocs.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Haig Fras Digital Twin</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#csv-organisms-annotations" class="nav-link">CSV - Organisms Annotations</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#initial-format" class="nav-link">Initial Format</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#format-conversion" class="nav-link">Format Conversion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#presentation-on-the-frontend" class="nav-link">Presentation on the Frontend</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="csv-organisms-annotations">CSV - Organisms Annotations</h1>
+<p>In this project, we are working directly with data related to underwater photographs and annotations of marine organism occurrences. There is no standard for organizing this type of data and presenting it on a website. Currently, in this project, we are working with the following data sources:</p>
+<ul>
+<li>NOC Haig Fras 2012 autonomous underwater vehicle image survey</li>
+<li>NOC Haig Fras 2015 autonomous underwater vehicle image survey</li>
+<li>JNCC CEND2012 Survey</li>
+<li>National Biodiversity Network (NBN) Gateway</li>
+</ul>
+<p>The files were obtained from different sources in different formats. The following steps and data organization strategies will be described:</p>
+<h2 id="initial-format">Initial Format</h2>
+<p>Regarding the two NOC campaigns, the purpose was to capture seafloor images. These images underwent internal processing and organization and were converted to JPG files. In some cases, the images were also converted and georeferenced to GeoTIFF format. Along with the images, a CSV file with annotations related to organism observations and counts was also provided.</p>
+<p>For the JNCC campaign, images in JPG format and a list with the positions and occurrences of organisms were provided.</p>
+<p>For the NBN Atlas, data were extracted from <a href="https://nbnatlas.org">https://nbnatlas.org</a>. The NBN Atlas data were filtered by drawing a bounding box in the region of the Greater Haig Fras Marine Protected Area (MPA). Datasets without the CC-BY or CC-BY-NC license were removed. Datasets related to bird and planktonic surveys were individually excluded from the search.</p>
+<h2 id="format-conversion">Format Conversion</h2>
+<p>All CSV files were converted to GeoJSON and saved in the Object Store to facilitate plotting and data work on the frontend. For GeoTIFF images, they were converted to the COG format, also with the goal of accelerating rendering on the frontend.</p>
+<p>It should be noted that for NBN data, this download was subsequently passed through the <a href="https://www.marinespecies.org/aphia.php?p=match">World Register of Marine Species (WoRMS) Taxon Matching tool</a>, and the output was manually filtered to further restrict the output to contain only plants and invertebrate animals, excluding plankton.</p>
+<p>It should be noted that the CSV files, GeoJSON, JPG, and COG images were described in the <a href="https://radiantearth.github.io/stac-browser/#/external/pilot-imfe-o.s3-ext.jc.rl.ac.uk/haig-fras/stac/Seabed%20Images/catalog.json">STAC Catalog of these images</a>.</p>
+<h2 id="presentation-on-the-frontend">Presentation on the Frontend</h2>
+<p>For presenting the data on maps, the frontend fetches the GeoJSON files, which contain all the necessary information for plotting on the maps.</p>
+<p><img alt="Photo Markers" src="../assets/markers.png" />
+<em>Example of how photos are arranged and presented in the frontend application</em></p>
+<p><img alt="Sample Image" src="../assets/sample_image.png" />
+<em>Example of one of the underwater images</em></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../js/print-site.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
