@@ -1,5 +1,4 @@
 # HAIG FRAS PROJECT DOCUMENTATION
-====================
 
 This project represents the documentation for the Digital Twin project for Haig-Fras.
 
