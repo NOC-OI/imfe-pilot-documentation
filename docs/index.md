@@ -34,6 +34,8 @@ These are the project repositories:
 
 - [frontend](https://github.com/NOC-OI/imfe-pilot-frontend): A frontend application created in React, with the ability to interact with different data formats on both the backend and frontend. This project depends on certain backend services to perform tile server activities, as well as authentication and data calculations.
 
+- [API](https://github.com/NOC-OI/imfe-pilot-api): The backend APIs that are called from the frontend to retreive data, perform calculations on that data, handle logins and access permissions. 
+
 - [tileserver](https://github.com/NOC-OI/imfe-pilot-tileserver): Repository for configuring and creating tile servers.
 
 - [monitor_docker](https://github.com/NOC-OI/monitor_docker): A Python package for monitoring container operation on the server.
