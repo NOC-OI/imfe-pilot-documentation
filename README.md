@@ -64,3 +64,7 @@ nav:
 ```
 
 If you do not include the `nav` option, all your .md files in the `docs` folder will be items in your navbar.
+
+## License
+Haig Fras Digital Twin Documentation © 2023 by National Oceanography Centre is licensed under CC BY 4.0. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
+
