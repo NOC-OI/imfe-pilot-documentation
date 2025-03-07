@@ -4,6 +4,8 @@ This project represents the documentation for the Digital Twin project for Haig-
 
 It was assembled based on the mkdocs package.
 
+You can access the documentation on this link: https://noc-oi.github.io/imfe-pilot-documentation/
+
 ## Installation
 
 1. Create a Python 3 virtual environment and activate it:
